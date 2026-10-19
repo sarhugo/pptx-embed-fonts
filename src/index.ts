@@ -149,10 +149,11 @@ class PPTXEmbedFonts {
         embeddedFontLstNode.appendChild(embeddedFontNode);
       }
       const tag = STYLE_TAG[font.style];
-      if (embeddedFontNode.getElementsByTagName(tag).length > 0) continue;
-      const node = doc.createElement(tag);
-      node.setAttribute("r:id", `rId${font.rid}`);
-      embeddedFontNode.appendChild(node);
+      if (embeddedFontNode.getElementsByTagName(tag).length == 0) {
+        const node = doc.createElement(tag);
+        node.setAttribute("r:id", `rId${font.rid}`);
+        embeddedFontNode.appendChild(node);
+      }
     });
 
     this.zip.file("ppt/presentation.xml", doc.toString());
